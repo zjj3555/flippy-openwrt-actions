@@ -20,7 +20,7 @@
 #=============================== Set make environment variables ===============================
 #
 # Set the default package source download repository
-SCRIPT_REPO_URL_VALUE="https://github.com/unifreq/openwrt_packit"
+SCRIPT_REPO_URL_VALUE="https://github.com/zjj3555/openwrt_packit"
 SCRIPT_REPO_BRANCH_VALUE="master"
 
 # Set the *rootfs.tar.gz package save name
@@ -28,20 +28,13 @@ PACKAGE_FILE="openwrt-armsr-armv8-generic-rootfs.tar.gz"
 
 # Set the list of supported device
 PACKAGE_OPENWRT=(
-    "ak88" "e52c" "e54c" "h88k" "h88k-v3" "rock5b" "rock5c"
-    "cm3" "e25" "photonicat" "r66s" "r68s" "rk3399"
-    "e20c" "e24c" "h28k" "h66k" "h68k" "h69k" "h69k-max" "ht2" "jp-tvbox" "watermelon-pi" "yixun-rs6pro" "zcube1-max"
-    "s922x" "s922x-n2" "s905x3" "s905x2" "s912" "s905d" "s905"
-    "beikeyun" "l1pro"
-    "vplus"
-    "qemu"
-    "diy"
+    "h28k" "yixun-rs6pro" 
 )
 # Set the list of devices using the [ rk3588 ] kernel
-PACKAGE_OPENWRT_RK3588=("ak88" "e52c" "e54c" "h88k" "h88k-v3" "rock5b" "rock5c")
+#PACKAGE_OPENWRT_RK3588=("ak88" "e52c" "e54c" "h88k" "h88k-v3" "rock5b" "rock5c")
 # Set the list of devices using the [ rk35xx ] kernel
 # Devices from the rk3528/rk3566/rk3568 series can utilize the rk35xx and rk3588 kernels.
-PACKAGE_OPENWRT_RK35XX=("e20c" "e24c" "h28k" "h66k" "h68k" "h69k" "h69k-max" "ht2" "jp-tvbox" "watermelon-pi" "yixun-rs6pro" "zcube1-max")
+PACKAGE_OPENWRT_RK35XX=( "h28k"  "yixun-rs6pro")
 # Set the list of devices using the [ 6.x.y ] kernel
 PACKAGE_OPENWRT_6XY=("cm3" "e25" "photonicat" "r66s" "r68s" "rk3399")
 # All are packaged by default, and independent settings are supported, such as: [ s905x3_s905d_rock5b ]
@@ -63,41 +56,11 @@ GZIP_IMGS_VALUE="auto"
 SAVE_OPENWRT_ARMSR_VALUE="true"
 
 # Set the default packaging script
-SCRIPT_BEIKEYUN_FILE="mk_rk3328_beikeyun.sh"
-SCRIPT_CM3_FILE="mk_rk3566_radxa-cm3-rpi-cm4-io.sh"
-SCRIPT_DIY_FILE="mk_diy.sh"
-SCRIPT_E20C_FILE="mk_rk3528_e20c.sh"
-SCRIPT_E24C_FILE="mk_rk3528_e24c.sh"
-SCRIPT_E25_FILE="mk_rk3568_e25.sh"
-SCRIPT_E52C_FILE="mk_rk3588s_e52c.sh"
-SCRIPT_E54C_FILE="mk_rk3588s_e54c.sh"
+
 SCRIPT_H28K_FILE="mk_rk3528_h28k.sh"
-SCRIPT_H66K_FILE="mk_rk3568_h66k.sh"
-SCRIPT_H68K_FILE="mk_rk3568_h68k.sh"
-SCRIPT_H69K_FILE="mk_rk3568_h69k.sh"
-SCRIPT_H88K_FILE="mk_rk3588_h88k.sh"
-SCRIPT_H88KV3_FILE="mk_rk3588_h88k-v3.sh"
-SCRIPT_HT2_FILE="mk_rk3528_ht2.sh"
-SCRIPT_JPTVBOX_FILE="mk_rk3566_jp-tvbox.sh"
-SCRIPT_L1PRO_FILE="mk_rk3328_l1pro.sh"
-SCRIPT_PHOTONICAT_FILE="mk_rk3568_photonicat.sh"
-SCRIPT_QEMU_FILE="mk_qemu-aarch64_img.sh"
-SCRIPT_R66S_FILE="mk_rk3568_r66s.sh"
-SCRIPT_R68S_FILE="mk_rk3568_r68s.sh"
-SCRIPT_RK3399_FILE="mk_rk3399_generic.sh"
-SCRIPT_ROCK5B_FILE="mk_rk3588_rock5b.sh"
-SCRIPT_ROCK5C_FILE="mk_rk3588s_rock5c.sh"
-SCRIPT_S905_FILE="mk_s905_mxqpro+.sh"
-SCRIPT_S905D_FILE="mk_s905d_n1.sh"
-SCRIPT_S905X2_FILE="mk_s905x2_x96max.sh"
-SCRIPT_S905X3_FILE="mk_s905x3_multi.sh"
-SCRIPT_S912_FILE="mk_s912_zyxq.sh"
-SCRIPT_S922X_FILE="mk_s922x_gtking.sh"
-SCRIPT_S922X_N2_FILE="mk_s922x_odroid-n2.sh"
-SCRIPT_VPLUS_FILE="mk_h6_vplus.sh"
-SCRIPT_WATERMELONPI_FILE="mk_rk3568_watermelon-pi.sh"
+
 SCRIPT_RS6PRO_FILE="mk_rk3528_rs6pro.sh"
-SCRIPT_ZCUBE1MAX_FILE="mk_rk3399_zcube1-max.sh"
+
 
 # Set make.env related parameters
 WHOAMI_VALUE="flippy"
@@ -145,41 +108,11 @@ init_var() {
     [[ -n "${SAVE_OPENWRT_ARMSR}" ]] || SAVE_OPENWRT_ARMSR="${SAVE_OPENWRT_ARMSR_VALUE}"
 
     # Specify the default packaging script
-    [[ -n "${SCRIPT_BEIKEYUN}" ]] || SCRIPT_BEIKEYUN="${SCRIPT_BEIKEYUN_FILE}"
-    [[ -n "${SCRIPT_CM3}" ]] || SCRIPT_CM3="${SCRIPT_CM3_FILE}"
-    [[ -n "${SCRIPT_DIY}" ]] || SCRIPT_DIY="${SCRIPT_DIY_FILE}"
-    [[ -n "${SCRIPT_E20C}" ]] || SCRIPT_E20C="${SCRIPT_E20C_FILE}"
-    [[ -n "${SCRIPT_E24C}" ]] || SCRIPT_E24C="${SCRIPT_E24C_FILE}"
-    [[ -n "${SCRIPT_E25}" ]] || SCRIPT_E25="${SCRIPT_E25_FILE}"
-    [[ -n "${SCRIPT_E52C}" ]] || SCRIPT_E52C="${SCRIPT_E52C_FILE}"
-    [[ -n "${SCRIPT_E54C}" ]] || SCRIPT_E54C="${SCRIPT_E54C_FILE}"
+    
     [[ -n "${SCRIPT_H28K}" ]] || SCRIPT_H28K="${SCRIPT_H28K_FILE}"
-    [[ -n "${SCRIPT_H66K}" ]] || SCRIPT_H66K="${SCRIPT_H66K_FILE}"
-    [[ -n "${SCRIPT_H68K}" ]] || SCRIPT_H68K="${SCRIPT_H68K_FILE}"
-    [[ -n "${SCRIPT_H69K}" ]] || SCRIPT_H69K="${SCRIPT_H69K_FILE}"
-    [[ -n "${SCRIPT_H88K}" ]] || SCRIPT_H88K="${SCRIPT_H88K_FILE}"
-    [[ -n "${SCRIPT_H88KV3}" ]] || SCRIPT_H88KV3="${SCRIPT_H88KV3_FILE}"
-    [[ -n "${SCRIPT_HT2}" ]] || SCRIPT_HT2="${SCRIPT_HT2_FILE}"
-    [[ -n "${SCRIPT_JPTVBOX}" ]] || SCRIPT_JPTVBOX="${SCRIPT_JPTVBOX_FILE}"
-    [[ -n "${SCRIPT_L1PRO}" ]] || SCRIPT_L1PRO="${SCRIPT_L1PRO_FILE}"
-    [[ -n "${SCRIPT_PHOTONICAT}" ]] || SCRIPT_PHOTONICAT="${SCRIPT_PHOTONICAT_FILE}"
-    [[ -n "${SCRIPT_QEMU}" ]] || SCRIPT_QEMU="${SCRIPT_QEMU_FILE}"
-    [[ -n "${SCRIPT_R66S}" ]] || SCRIPT_R66S="${SCRIPT_R66S_FILE}"
-    [[ -n "${SCRIPT_R68S}" ]] || SCRIPT_R68S="${SCRIPT_R68S_FILE}"
-    [[ -n "${SCRIPT_RK3399}" ]] || SCRIPT_RK3399="${SCRIPT_RK3399_FILE}"
-    [[ -n "${SCRIPT_ROCK5B}" ]] || SCRIPT_ROCK5B="${SCRIPT_ROCK5B_FILE}"
-    [[ -n "${SCRIPT_ROCK5C}" ]] || SCRIPT_ROCK5C="${SCRIPT_ROCK5C_FILE}"
-    [[ -n "${SCRIPT_S905}" ]] || SCRIPT_S905="${SCRIPT_S905_FILE}"
-    [[ -n "${SCRIPT_S905D}" ]] || SCRIPT_S905D="${SCRIPT_S905D_FILE}"
-    [[ -n "${SCRIPT_S905X2}" ]] || SCRIPT_S905X2="${SCRIPT_S905X2_FILE}"
-    [[ -n "${SCRIPT_S905X3}" ]] || SCRIPT_S905X3="${SCRIPT_S905X3_FILE}"
-    [[ -n "${SCRIPT_S912}" ]] || SCRIPT_S912="${SCRIPT_S912_FILE}"
-    [[ -n "${SCRIPT_S922X}" ]] || SCRIPT_S922X="${SCRIPT_S922X_FILE}"
-    [[ -n "${SCRIPT_S922X_N2}" ]] || SCRIPT_S922X_N2="${SCRIPT_S922X_N2_FILE}"
-    [[ -n "${SCRIPT_VPLUS}" ]] || SCRIPT_VPLUS="${SCRIPT_VPLUS_FILE}"
-    [[ -n "${SCRIPT_WATERMELONPI}" ]] || SCRIPT_WATERMELONPI="${SCRIPT_WATERMELONPI_FILE}"
+    
     [[ -n "${SCRIPT_RS6PRO}" ]] || SCRIPT_RS6PRO="${SCRIPT_RS6PRO_FILE}"
-    [[ -n "${SCRIPT_ZCUBE1MAX}" ]] || SCRIPT_ZCUBE1MAX="${SCRIPT_ZCUBE1MAX_FILE}"
+   
 
     # Specify make.env variable
     [[ -n "${WHOAMI}" ]] || WHOAMI="${WHOAMI_VALUE}"

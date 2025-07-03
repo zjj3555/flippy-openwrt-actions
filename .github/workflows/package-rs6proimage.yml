@@ -1,0 +1,18 @@
+- name: Package OpenWrt Firmware
+  uses: ophub/flippy-openwrt-actions@main
+  env:
+    OPENWRT_ARMSR: openwrt/bin/targets/*/*/*.tar.gz  #设置 openwrt-armsr-armv8-generic-rootfs.tar.gz 的文件路径
+    PACKAGE_SOC: yixun-rs6pro  #设置打包盒子的soc
+    KERNEL_VERSION_NAME:5.10 #内核版本
+    KERNEL_AUTO_LATEST: true #保持最新内核版本
+    SCRIPT_RS6PRO:mk_rk3528_rs6pro.sh #设置打包 rk3528 yixun-rs6pro 的脚本文件名
+    SCRIPT_DIY_PATH:Actions-iStoreOS-RK35XX/diy-part1.sh Actions-iStoreOS-RK35XX/diy-part2.sh
+    WHOAMI:flippy
+    OPENWRT_VER:auto
+    SW_FLOWOFFLOAD:1
+    HW_FLOWOFFLOAD:0
+    SFE_FLOW:1
+    ENABLE_WIFI_K504:1
+    ENABLE_WIFI_K510:1
+    DISTRIB_REVISION:1
+    DISTRIB_DESCRIPTION:1
